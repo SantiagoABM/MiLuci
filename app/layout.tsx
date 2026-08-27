@@ -16,8 +16,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Nuestro mes de enamorados",
-  description: "Un collage de recuerdos, un contador y un calendario de amor.",
+  title: "28 meses",
+  description: "Una dedicatoria para ti my love.",
 };
 
 export default function RootLayout({
