@@ -2,11 +2,15 @@
 // EDITA SOLO ESTE ARCHIVO PARA PERSONALIZAR TU PÁGINA
 // ─────────────────────────────────────────────────────────────
 
+import { monthsSince } from "./time";
+
 // Fecha en la que empezaron (se usa para el contador en vivo)
-export const START_DATE = "2024-04-28T00:00:00";
+
+export const START_DATE = "2024-04-28T07:00:00";
+export const ACTUAL_MONTHS = monthsSince(START_DATE);
 
 // Mes que se muestra en el calendario
-export const MONTH_NAME = "28 meses 28 recuerdos";
+export const MONTH_NAME = monthsSince(START_DATE) + " meses 28 recuerdos";
 export const MONTH_YEAR = 2026;
 export const DAYS_IN_MONTH = 28;
 
@@ -15,7 +19,7 @@ export const HIGHLIGHT_DAY = 28;
 
 // Nombres de la pareja (para el hero)
 export const COUPLE_NAMES = "Tú & Yo";
-export const HERO_TITLE = "28 meses juntos";
+export const HERO_TITLE = monthsSince(START_DATE) + " meses juntos";
 export const HERO_SUBTITLE =
   "Un collage de todo lo que hemos estado viviendo.";
 
@@ -53,7 +57,7 @@ export const HIGHLIGHT_CAPTION = "El día que todo empezó 🌸";
 // - "image": hay que tocar la foto correcta del collage.
 // - "code":  hay que escribir una clave.
 // ─────────────────────────────────────────────────────────────
-export const LOCK_MODE: "image" | "code" = "image";
+export const LOCK_MODE: "image" | "code" = "code";
 
 // Modo "image": índice (empezando en 0) dentro de COLLAGE_PHOTOS
 // que es la foto correcta. Ej: 0 = la primera foto de COLLAGE_PHOTOS.
@@ -63,22 +67,24 @@ export const CORRECT_PHOTO_INDEX = 0;
 export const LOCK_HINT = "Toca la foto que abre la carta";
 
 // Modo "code": la clave que hay que escribir (no distingue mayúsculas)
-export const LOCK_CODE = "2802";
+export const LOCK_CODE = "280424";
 export const LOCK_CODE_HINT = "Pista: el día que empezó todo";
 
 // Texto de la carta que se revela al desbloquear
 export const LOVE_LETTER = `
-Para la niña que alegra mis días y me escogió 😋​.
+Hola amor, felices ${monthsSince(START_DATE)} meses, sé que sentimos que ya nos está afectando el cambio de horario, pero quiero que sepas que a pesar de todo lo que estamos pasando, sigo y seguiré estando aquí para ti.
 
-Hola amor, sé que no es el mejor día ni el mejor lugar para esto pero, queria agradecerte por todo lo que has hecho por mi, por quererme como soy, por apoyarme en mis decisiones y por estar siempre ahí para mí.
+Sabemos que la distancia es un obstáculo pero no tengo duda de que vamos a salir adelante, a pesar de los problemas, de los celos, de las peleas, de las pruebas y de todo lo que hemos pasado, seguimos aquí, juntos y fortaleciendo nuestra relación. 
 
-Espero que te guste este pequeño detalle, lo hice con mucho cariño y amor. No es lo que quisiera pero es lo que pude hacer, sé que a pesar de la distancia, de los problemas, de los celos, de las peleas, de las pruebas y de todo lo que hemos pasado, seguimos aquí, juntos y más fuertes que nunca. 
+Quizás pienses que ya no te presto tanta atención como antes, o que ya no te amo igual, pero créeme que no es así, solo que a veces me siento abrumado por todo lo que estamos pasando, pero eso no significa que te ame menos, al contrario, te amo más cada día que pasa.
+
+Y aunque a veces me porte como un idiota, no te cambio por nada del mundo.
 
 Gracias por ser mi compañera, mi confidente, mi mejor amiga, mi todo. No sé que haría sin ti. Eres la mejor persona que he conocido y estoy muy feliz de tenerte en mi vida, aunque a veces me porte como un niño pequeño, no te cambio por nada del mundo.
 
-Te amo y te amaré por siempre.
+Te amo y te seguiré amando hasta la vejez.
 
-Atte: Tu novio el más cariñoso en ambos sentidos contigo jsjs.
+Atte: Tu programador favorito <3.
 `;
 
 // Cómo se cargan las fotos del calendario:
@@ -132,3 +138,85 @@ export const TATA_ITEMS: TataItem[] = [
     description: "Algo que puedo llevar siempre que salga y me haga recordar a ti siempre batería.",
   },
 ];
+
+// Spotify-songs
+// --- Spotify ---
+
+export type SpotifyType = "track" | "album" | "playlist";
+
+export type SpotifyUnlock =
+  | { type: "available" }
+  | { type: "date"; at: string } // ISO UTC — Perú es siempre UTC-5, hora_UTC = hora_Perú + 5
+  | { type: "taps"; count: number };
+
+export interface SpotifySongConfig {
+  id: string;
+  type: SpotifyType;
+  title: string;
+  note?: string;
+  unlock: SpotifyUnlock;
+}
+
+export const SPOTIFY_SONGS: SpotifySongConfig[] = [
+  {
+    id: "0yKnn15144wfd5sCCNFnnE",
+    type: "track",
+    title: "On Melancholy Hill",
+    note: "Nuestra canción que nos recuerda el inicio de todo.",
+    unlock: { type: "available" }, // ← SIEMPRE DESBLOQUEADO
+  },
+  {
+    id: "6dOtVTDdiauQNBQEDOtlAB",
+    type: "album",
+    title: "Birds of a Feather",
+    note: "Una de las canciones que más me hace recordar a ti.",
+    unlock: { type: "taps", count: 28 }, // ← Bloqueado por taps
+  },
+  {
+    id: "2plbrEY59IikOBgBGLjaoe",
+    type: "track",
+    title: "Die With A Smile",
+    note: "Es una canción que me gusta escucharla por la razón de que es una de tus favoritas.",
+    unlock: { type: "taps", count: 4 },
+  },
+  {
+    id: "1MX0g22bQkr9HDVe37fLnN",
+    type: "track",
+    title: "134340",
+    note: "BTS",
+    unlock: { type: "taps", count: 24 },
+  },
+  {
+    id: "2j1fFjWHCI9KJSwcuYAOyF",
+    type: "track",
+    title: "Spring Day",
+    note: "BTS",
+    unlock: { type: "date", at: "2026-09-28T07:00:00Z" }, //<- Bloqueado por fecha
+  },
+  {
+    id: "1HYzRuWjmS9LXCkdVHi25K",
+    type: "track",
+    title: "Stay with me",
+    note: "Chanyeol, Punch",
+    unlock: { type: "date", at: "2026-09-28T07:00:00Z" },
+  },
+  {
+    id: "609SDGj0txmlAXRrpwee9Y",
+    type: "track",
+    title: "Llegaste tú",
+    note: "Luis Fonsi ft. Juan Luis Guerra",
+    unlock: { type: "date", at: "2026-09-28T07:00:00Z" },
+  },
+  {
+    id: "351dqwRVsCDniedG9soXSf",
+    type: "track",
+    title: "Un Beso En Madrid",
+    note: "TINI & Alejandro Sanz",
+    unlock: { type: "date", at: "2026-09-28T07:00:00Z" },
+  },
+];
+
+// Flores amarillas
+
+export const FLOWER_MESSAGE = `Aquí tienes tu ramo amor, sé que no es como uno real pero este es
+uno que no se marchita, perdón el retraso amorcito.`;
