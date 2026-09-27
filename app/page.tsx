@@ -27,7 +27,7 @@ export default function Home() {
       >
       <LockedLetter />
       </UnlockGate>
-      <UnlockGate id="spotify-songs" unlock={{ type: "taps", count: 883 }} title="paciencia...">
+      <UnlockGate id="spotify-songs" unlock={{ type: "taps", count: 83 }} title="paciencia...">
       <SpotifySong />
       </UnlockGate>
       <footer className="py-14 px-6 text-center border-t border-periwinkle/15">

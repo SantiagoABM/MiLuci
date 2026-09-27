@@ -167,7 +167,7 @@ export const SPOTIFY_SONGS: SpotifySongConfig[] = [
   },
   {
     id: "6dOtVTDdiauQNBQEDOtlAB",
-    type: "album",
+    type: "track",
     title: "Birds of a Feather",
     note: "Una de las canciones que más me hace recordar a ti.",
     unlock: { type: "taps", count: 28 }, // ← Bloqueado por taps
